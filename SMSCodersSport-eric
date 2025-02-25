@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/sportbd?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  application:
+    name: SMSCodersSport
+
+security:
+  jwt:
+    secret: "bW9QbG9YV0tsR1JxV1hCZ2hNQm5NZGZacU5TYkJ5YWc="
+    expirationMs: 86400000  # Token expiration time (in milliseconds)
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka  # Corrected Eureka server URL
+  instance:
+    prefer-ip-address: true
+    ip-address: localhost  # Use the correct IP address for sms-full
+    hostname: sms-coders-sport  # Set to the hostname of the sms-coders-sports VM or keep as is
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web: TRACE
+    org.springframework.security: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+  endpoint:
+    health:
+      show-details: always
