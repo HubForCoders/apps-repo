@@ -1,24 +1,21 @@
 # Configuracion del Api Gateway
 spring:
-  application:
-    name: sms-gateway
   cloud:
     gateway:
       mvc:
         routes:
           - id: sport_management
-            uri: lb://smsarchetype
+            uri: lb://SMSCodersSport
             predicates:
-              - Path=/teams/** #currently, we cannot have list of paths
+              - Path=/api/v1/** #currently, we cannot have list of paths
               - Method=POST,PUT,GET,DELETE
 
-# Actuator Activo
 management:
   endpoint:
     gateway:
       enabled: true
 
-# Configuracion de Eureka
+# Configuration of Eureka
 eureka:
   client:
     service-url:
